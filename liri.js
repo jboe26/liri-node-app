@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 
 // Use node inquirer to get user input
 var inquirer = require('inquirer');
@@ -6,24 +6,13 @@ var inquirer = require('inquirer');
 var axios = require("axios");
 // Includes the FS package for reading and writing packages
 var fs = require("fs");
+// require keys.js
+var keys = require("./keys.js");
+// require spotify-node-app
+var Spotify = require('node-spotify-api');
+// require OMDB
+var omdb = require('omdb');
 
-// Running the readFile module that's inside of fs.
-// Stores the read information into the variable "data"
-fs.readFile("random.txt", "utf8", function(err, data) {
-  if (err) {
-    return console.log(err);
-  }
-
-  // Break the string down by comma separation and store the contents into the output array.
-  var output = data.split(",");
-
-  // Loop Through the newly created output array
-  for (var i = 0; i < output.length; i++) {
-
-    // Print each element (item) of the array/
-    console.log(output[i]);
-  }
-});
 
 // prompt the user to select an option from the list
 inquirer.prompt([
@@ -66,6 +55,25 @@ function userPrompt(command, userSearch) {
     }
 }
 
+// Running the readFile module that's inside of fs.
+// Stores the read information into the variable "data"
+fs.readFile("random.txt", "utf8", function(err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  // Break the string down by comma separation and store the contents into the output array.
+  var output = data.split(",");
+
+  // Loop Through the newly created output array
+  for (var i = 0; i < output.length; i++) {
+
+    // Print each element (item) of the array/
+    console.log(output[i]);
+  }
+});
+
+
 function concertThis() {
 
     var artist = 
@@ -100,3 +108,72 @@ function concertThis() {
         });
 
 }
+
+function spotifyThisSong() {
+
+var spotify = new Spotify(keys.spotify);
+ 
+var spotify = new Spotify({
+  id: "4d227c9d03e444359cd1ae63898cb027",
+  secret: "a20503eecb1741c3938ea49a95259f6e"
+});
+ 
+spotify.search({ type: 'track', query: 'spotify-this-song' }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+ 
+console.log(data); 
+});
+
+
+spotify
+  .request('https://api.spotify.com/v1/tracks/trilogy')
+  .then(function(data) {
+    console.log(data); 
+  })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err); 
+  });
+
+}
+
+
+function movieThis() {
+    omdb.search('Mr. Nobody', function(err, movies) {
+        if(err) {
+            return console.error(err);
+        }
+     
+        if(movies.length < 1) {
+            return console.log('No movies were found!');
+        }
+     
+        movies.forEach(function(movie) {
+            console.log(movie.title, movie.year);
+        });
+     
+    });
+     
+    omdb.get({ title: 'Mr. Nobody'}, true, function(err, movie) {
+        if(err) {
+            return console.error(err);
+        }
+     
+        if(!movie) {
+            return console.log('Movie not found!');
+        }
+     
+        console.log(movie.title, movie.year, movie.imdb.rating);
+        console.log(movie.plot);
+     
+        
+    });
+    
+    }
+
+    function doThis() {
+
+
+        
+    }
