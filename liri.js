@@ -131,10 +131,11 @@ spotify
   .request('https://api.spotify.com/v1/tracks/trilogy')
   .then(function(data) {
     console.log(data); 
+    console.log(spotify);
   })
   .catch(function(err) {
     console.error('Error occurred: ' + err); 
-  });
+  });   
 
 }
 
@@ -177,3 +178,4 @@ function movieThis() {
 
         
     }
+    
