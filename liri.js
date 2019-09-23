@@ -78,11 +78,10 @@ fs.readFile("random.txt", "utf8", function(err, data) {
 
 function concertThis() {
 
-    var artist = process.argv[2];
-    console.log(artist);
+    
 
     // Then run a request with axios to the OMDB API with the movie specified
-    axios.get(("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"))
+    axios.get(("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp"))
         .then(
             function (response) {
                 console.log(response.data);
