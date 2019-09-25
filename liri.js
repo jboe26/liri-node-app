@@ -10,8 +10,7 @@ var fs = require("fs");
 var keys = require("./keys.js");
 // require spotify-node-app
 var Spotify = require('node-spotify-api');
-// require OMDB
-var omdb = require('omdb');
+
 
 var command = process.argv[2];
 var search = process.argv[3];
@@ -60,9 +59,15 @@ function concertThis() {
   axios.get(("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp"))
     .then(
       function (response) {
-        console.log(response.data);
+        for (var i=0; i < response.data.length; i++) {
+        console.log("+++++++++++++++++++++++++++++++++++++++");
+        console.log("Venue name: ", response.data[i].venue.name);
+        console.log("Location: ", response.data[i].venue.city);
+        console.log("Date of the event: ", response.data[i].datetime);
+        }  
       }
     )
+      
     .catch(function (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
