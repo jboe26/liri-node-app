@@ -29,6 +29,7 @@ switch (command) {
   case "do-what-it-says":
     doThis(search);
     break;
+    
     default: 
       console.log("Please enter something");
     break;
@@ -84,24 +85,8 @@ function spotifyThisSong(search) {
       return console.log('Error occurred: ' + err);
     }
 
-    console.log(data);
+    console.log(data.tracks.items);
   });
-
-
-  Spotify
-    .request('https://api.spotify.com/v1/' + search + 'trilogy')
-    .then(function (data) {
-      console.log(data);
-      console.log(spotify);
-      for (var i = 0; i < response.track.items.length; i++);
-          console.log("Atrist: " + response.track.items[i].artist.name)
-          console.log("Song: " + response.track.items[i].name)
-          console.log("URL: " + response.track.items[i].preview_url)
-          console.log("Album: " + response.track.items[i].album.name)
-    })
-    .catch(function (err) {
-      console.error('Error occurred: ' + err);
-    });
 
 }
 
