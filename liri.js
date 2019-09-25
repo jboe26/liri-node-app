@@ -30,36 +30,36 @@ var omdb = require('omdb');
 //         message: "What artist/band would you like?"
 //     }
 
-    // After the prompt, store the user's response in a variable called location.
+// After the prompt, store the user's response in a variable called location.
 
 // ])
-    // .then(function (inquirerResponse) {
-    //     console.log(inquirerResponse) 
-    // })
+// .then(function (inquirerResponse) {
+//     console.log(inquirerResponse) 
+// })
 
-    var command = process.argv[2];
-    var search =  process.argv[3];
+var command = process.argv[2];
+var search = process.argv[3];
 
-    // make a decision based on the command
-    switch (command) {
-        case "concert-this":
-            concertThis(search);
-            break;
-        case "spotify-this":
-            spotifyThisSong(search);
-            break;
-        case "movie-this":
-            movieThis(search);
-            break;
-        case "do-what-it-says":
-            doThis(search);
-            break;
-    }
+// make a decision based on the command
+switch (command) {
+  case "concert-this":
+    concertThis(search);
+    break;
+  case "spotify-this":
+    spotifyThisSong(search);
+    break;
+  case "movie-this":
+    movieThis(search);
+    break;
+  case "do-what-it-says":
+    doThis(search);
+    break;
+}
 
 
 // Running the readFile module that's inside of fs.
 // Stores the read information into the variable "data"
-fs.readFile("random.txt", "utf8", function(err, data) {
+fs.readFile("random.txt", "utf8", function (err, data) {
   if (err) {
     return console.log(err);
   }
@@ -78,114 +78,113 @@ fs.readFile("random.txt", "utf8", function(err, data) {
 
 function concertThis() {
 
-    
 
-    // Then run a request with axios to the OMDB API with the movie specified
-    axios.get(("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp"))
-        .then(
-            function (response) {
-                console.log(response.data);
-            }
-        )
-        .catch(function (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log("---------------Data---------------");
-                console.log(error.response.data);
-                console.log("---------------Status---------------");
-                console.log(error.response.status);
-                console.log("---------------Status---------------");
-                console.log(error.response.headers);
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an object that comes back with details pertaining to the error that occurred.
-                console.log(error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log("Error", error.message);
-            }
-            console.log(error.config);
-        });
+
+  // Then run a request with axios to the OMDB API with the movie specified
+  axios.get(("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp"))
+    .then(
+      function (response) {
+        console.log(response.data);
+      }
+    )
+    .catch(function (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log("---------------Data---------------");
+        console.log(error.response.data);
+        console.log("---------------Status---------------");
+        console.log(error.response.status);
+        console.log("---------------Status---------------");
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an object that comes back with details pertaining to the error that occurred.
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+    });
 
 }
 
 function spotifyThisSong() {
 
-var spotify = new Spotify(keys.spotify);
- 
-// var Spotify = new Spotify({
-//   id: "4d227c9d03e444359cd1ae63898cb027",
-//   secret: "a20503eecb1741c3938ea49a95259f6e"
-// });
- 
-spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
- 
-console.log(data); 
-});
+  var spotify = new Spotify(keys.spotify);
+
+  // var Spotify = new Spotify({
+  //   id: "4d227c9d03e444359cd1ae63898cb027",
+  //   secret: "a20503eecb1741c3938ea49a95259f6e"
+  // });
+
+  spotify.search({ type: 'track', query: 'The Sign' }, function (err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+
+    console.log(data);
+  });
 
 
-spotify
-  .request('https://api.spotify.com/v1/tracks/trilogy')
-  .then(function(data) {
-    console.log(data); 
-    console.log(spotify);
-  })
-  .catch(function(err) {
-    console.error('Error occurred: ' + err); 
-  });   
+  spotify
+    .request('https://api.spotify.com/v1/tracks/trilogy')
+    .then(function (data) {
+      console.log(data);
+      console.log(spotify);
+    })
+    .catch(function (err) {
+      console.error('Error occurred: ' + err);
+    });
 
 }
 
 
 function movieThis() {
 
-// Then run a request with axios to the OMDB API with the movie specified
-axios.get("http://www.omdbapi.com/?t="+search+"&y=&plot=short&apikey=trilogy")
-  .then(
-    function (response) {
-   console.log("+++++++++++++++++++++++++++++++++++++++++++++++");
-   console.log("Title: " + response.data.Title);
-   console.log("Year: " + response.data.Year);
-   console.log("IMDB Rating: " + response.data.imdbRating);
-   console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1]);
-   console.log("Country of origin: " + response.data.Country);
-   console.log("Language: " + response.data.Language);
-   console.log("Plot: " + response.data.Plot);
-   console.log("Actors/Actresses: " + response.data.Actors);
-   console.log("+++++++++++++++++++++++++++++++++++++++++++++++");
-    }
-  )
-  .catch(function (error) {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log("---------------Data---------------");
-      console.log(error.response.data);
-      console.log("---------------Status---------------");
-      console.log(error.response.status);
-      console.log("---------------Status---------------");
-      console.log(error.response.headers);
-    } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an object that comes back with details pertaining to the error that occurred.
-      console.log(error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.log("Error", error.message);
-    }
-    console.log(error.config);
-  });
-
-    
-    }
-
-    function doThis() {
+  // Then run a request with axios to the OMDB API with the movie specified
+  axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy")
+    .then(
+      function (response) {
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++");
+        console.log("Title: " + response.data.Title);
+        console.log("Year: " + response.data.Year);
+        console.log("IMDB Rating: " + response.data.imdbRating);
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1]);
+        console.log("Country of origin: " + response.data.Country);
+        console.log("Language: " + response.data.Language);
+        console.log("Plot: " + response.data.Plot);
+        console.log("Actors/Actresses: " + response.data.Actors);
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++");
+      }
+    )
+    .catch(function (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log("---------------Data---------------");
+        console.log(error.response.data);
+        console.log("---------------Status---------------");
+        console.log(error.response.status);
+        console.log("---------------Status---------------");
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an object that comes back with details pertaining to the error that occurred.
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+    });
 
 
-        
-    }
-    
+}
+
+function doThis() {
+
+
+
+}
