@@ -13,7 +13,7 @@ var Spotify = require('node-spotify-api');
 
 
 var command = process.argv[2];
-var search = process.argv[3];
+var search = process.argv.slice(3).join(" ");
 
 // make a decision based on the command
 switch (command) {
@@ -79,7 +79,7 @@ function spotifyThisSong(search) {
   var spotify = new Spotify(keys.spotify);
   console.log(spotify);
 
-  spotify.search({ type: 'track', query: 'The Sign' }, function (err, data) {
+  spotify.search({ type: 'track', query: search }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -89,12 +89,12 @@ function spotifyThisSong(search) {
 
 
   Spotify
-    .request('https://api.spotify.com/v1/tracks/trilogy')
+    .request('https://api.spotify.com/v1/' + search + 'trilogy')
     .then(function (data) {
       console.log(data);
       console.log(spotify);
       for (var i = 0; i < response.track.items.length; i++);
-      console.log("Atrist: " + response.track.items[i].artist.name)
+          console.log("Atrist: " + response.track.items[i].artist.name)
           console.log("Song: " + response.track.items[i].name)
           console.log("URL: " + response.track.items[i].preview_url)
           console.log("Album: " + response.track.items[i].album.name)
