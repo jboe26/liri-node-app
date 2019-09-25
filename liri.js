@@ -113,11 +113,12 @@ function concertThis() {
 function spotifyThisSong() {
 
   var spotify = new Spotify(keys.spotify);
+  console.log(spotify);
 
-  // var Spotify = new Spotify({
-  //   id: "4d227c9d03e444359cd1ae63898cb027",
-  //   secret: "a20503eecb1741c3938ea49a95259f6e"
-  // });
+  var spotify = new Spotify({
+    id: "4d227c9d03e444359cd1ae63898cb027",
+    secret: "a20503eecb1741c3938ea49a95259f6e"
+  });
 
   spotify.search({ type: 'track', query: 'The Sign' }, function (err, data) {
     if (err) {
@@ -128,7 +129,7 @@ function spotifyThisSong() {
   });
 
 
-  spotify
+  Spotify
     .request('https://api.spotify.com/v1/tracks/trilogy')
     .then(function (data) {
       console.log(data);
