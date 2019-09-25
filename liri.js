@@ -13,30 +13,6 @@ var Spotify = require('node-spotify-api');
 // require OMDB
 var omdb = require('omdb');
 
-
-// // prompt the user to select an option from the list
-// inquirer.prompt([
-
-//     {
-//         type: "list",
-//         name: "commands",
-//         message: "Make a selection for LIRI to do!",
-//         choices: ["concert-this", "spotify-this-song", "movie-this", "do-what-it-says"]
-//     },
-
-//     {
-//         type: "input",
-//         name: "userInput",
-//         message: "What artist/band would you like?"
-//     }
-
-// After the prompt, store the user's response in a variable called location.
-
-// ])
-// .then(function (inquirerResponse) {
-//     console.log(inquirerResponse) 
-// })
-
 var command = process.argv[2];
 var search = process.argv[3];
 
@@ -152,7 +128,7 @@ function movieThis() {
         console.log("Title: " + response.data.Title);
         console.log("Year: " + response.data.Year);
         console.log("IMDB Rating: " + response.data.imdbRating);
-        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1]);
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
         console.log("Country of origin: " + response.data.Country);
         console.log("Language: " + response.data.Language);
         console.log("Plot: " + response.data.Plot);
