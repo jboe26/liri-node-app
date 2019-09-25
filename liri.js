@@ -29,6 +29,9 @@ switch (command) {
   case "do-what-it-says":
     doThis(search);
     break;
+    default: 
+      console.log("Please enter something");
+    break;
 }
 
 function concertThis() {
@@ -71,15 +74,15 @@ function concertThis() {
 
 }
 
-function spotifyThisSong() {
+function spotifyThisSong(search) {
 
   var spotify = new Spotify(keys.spotify);
   console.log(spotify);
 
-  var spotify = new Spotify({
-    id: "4d227c9d03e444359cd1ae63898cb027",
-    secret: "a20503eecb1741c3938ea49a95259f6e"
-  });
+  // var spotify = new Spotify({
+  //   id: "4d227c9d03e444359cd1ae63898cb027",
+  //   secret: "a20503eecb1741c3938ea49a95259f6e"
+  // });
 
   spotify.search({ type: 'track', query: 'The Sign' }, function (err, data) {
     if (err) {
@@ -95,6 +98,11 @@ function spotifyThisSong() {
     .then(function (data) {
       console.log(data);
       console.log(spotify);
+      for (var i = 0; i < response.track.items.length; i++);
+      console.log("Atrist: " + response.track.items[i].artist.name)
+          console.log("Song: " + response.track.items[i].name)
+          console.log("URL: " + response.track.items[i].preview_url)
+          console.log("Album: " + response.track.items[i].album.name)
     })
     .catch(function (err) {
       console.error('Error occurred: ' + err);
@@ -165,7 +173,7 @@ fs.readFile("random.txt", "utf8", function (err, data) {
     console.log(output[i]);
     command = output[0];
     search = output[1];
-    
+
   }
 });
 
