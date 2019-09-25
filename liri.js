@@ -79,11 +79,6 @@ function spotifyThisSong(search) {
   var spotify = new Spotify(keys.spotify);
   console.log(spotify);
 
-  // var spotify = new Spotify({
-  //   id: "4d227c9d03e444359cd1ae63898cb027",
-  //   secret: "a20503eecb1741c3938ea49a95259f6e"
-  // });
-
   spotify.search({ type: 'track', query: 'The Sign' }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
