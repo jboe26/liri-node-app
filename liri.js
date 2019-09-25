@@ -31,26 +31,6 @@ switch (command) {
     break;
 }
 
-
-// Running the readFile module that's inside of fs.
-// Stores the read information into the variable "data"
-fs.readFile("random.txt", "utf8", function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
-
-  // Break the string down by comma separation and store the contents into the output array.
-  var output = data.split(",");
-
-  // Loop Through the newly created output array
-  for (var i = 0; i < output.length; i++) {
-
-    // Print each element (item) of the array/
-    console.log(output[i]);
-  }
-});
-
-
 function concertThis() {
 
 
@@ -167,6 +147,27 @@ function movieThis() {
 
 function doThis() {
 
+// Running the readFile module that's inside of fs.
+// Stores the read information into the variable "data"
+fs.readFile("random.txt", "utf8", function (err, data) {
+  if (err) {
+    return console.log(err);
+  } else { 
+      // Break the string down by comma separation and store the contents into the output array.
+  var output = data.split(",");
+  console.log(output)
+  }
+
+  // Loop Through the newly created output array
+  for (var i = 0; i < output.length; i++) {
+
+    // Print each element (item) of the array/
+    console.log(output[i]);
+    command = output[0];
+    search = output[1];
+    
+  }
+});
 
 
 }
