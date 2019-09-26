@@ -24,7 +24,7 @@ switch (command) {
   case "movie-this":
     movieThis(search);
     break;
-  case "do-what-it-says":
+  case "do-this":
     doThis(search);
     break;
     
