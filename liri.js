@@ -1,7 +1,5 @@
 require("dotenv").config();
 
-// Use node inquirer to get user input
-// var inquirer = require('inquirer');
 // Include the axios npm package (Don't forget to run "npm install axios" in this folder first!)
 var axios = require("axios");
 // Includes the FS package for reading and writing packages
