@@ -12,27 +12,30 @@ var Spotify = require('node-spotify-api');
 
 var command = process.argv[2];
 var search = process.argv.slice(3).join(" ");
+getCommand(command, search);
 
 // make a decision based on the command
-switch (command) {
-  case "concert-this":
-    concertThis(search);
-    break;
-  case "spotify-this":
-    spotifyThisSong(search);
-    break;
-  case "movie-this":
-    movieThis(search);
-    break;
-  case "do-this":
-    doThis(search);
-    break;
-    
-    default: 
-      console.log("Please enter something");
-    break;
-}
+function getCommand(command, search) {
 
+  switch (command) {
+    case "concert-this":
+      concertThis(search);
+      break;
+    case "spotify-this":
+      spotifyThisSong(search);
+      break;
+    case "movie-this":
+      movieThis(search);
+      break;
+    case "do-this":
+      doThis();
+      break;
+
+    default:
+      console.log("Please enter something");
+      break;
+  }
+}
 function concertThis() {
 
 
@@ -41,15 +44,15 @@ function concertThis() {
   axios.get(("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp"))
     .then(
       function (response) {
-        for (var i=0; i < response.data.length; i++) {
-        console.log("+++++++++++++++++++++++++++++++++++++++");
-        console.log("Venue name: ", response.data[i].venue.name);
-        console.log("Location: ", response.data[i].venue.city);
-        console.log("Date of the event: ", response.data[i].datetime);
-        }  
+        for (var i = 0; i < response.data.length; i++) {
+          console.log("+++++++++++++++++++++++++++++++++++++++");
+          console.log("Venue name: ", response.data[i].venue.name);
+          console.log("Location: ", response.data[i].venue.city);
+          console.log("Date of the event: ", response.data[i].datetime);
+        }
       }
     )
-      
+
     .catch(function (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -133,27 +136,22 @@ function movieThis() {
 
 function doThis() {
 
-// Running the readFile module that's inside of fs.
-// Stores the read information into the variable "data"
-fs.readFile("random.txt", "utf8", function (err, data) {
-  if (err) {
-    return console.log(err);
-  } else { 
+  // Running the readFile module that's inside of fs.
+  // Stores the read information into the variable "data"
+  fs.readFile("random.txt", "utf8", function (error, data) {
+    if (error) {
+      return console.log(red("ERROR" + error));
+    } else {
       // Break the string down by comma separation and store the contents into the output array.
-  var output = data.split(",");
-  console.log(output)
-  }
+      var output = data.split(",");
+      console.log(output)
 
-  // Loop Through the newly created output array
-  for (var i = 0; i < output.length; i++) {
+      command = output[0];
+      search = output[1];
+      getCommand(command, search);
+    }
 
-    // Print each element (item) of the array/
-    console.log(output[i]);
-    command = output[0];
-    search = output[1];
-
-  }
-});
+  });
 
 
 }
