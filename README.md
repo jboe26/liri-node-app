@@ -10,3 +10,4 @@ For the node liri.js cocert-this <band/artist> command it will take whatever ban
 For the node liri.js spotify-this-song <song name> it will surch Spotify and show who the artist(s) the song name a link to preview the song and what album its from. If there is nothing given then it will surch "The Sign" by Ace of Base.
 For the node liri.js movie-this <movie name> it will look though the OMDB API and show the the title of the movie, the year it came out, the rating form IMDB, the Rotten Tomatoes rating, the country the movie was made in, the language, and the list of actors who play in it. If there's nothing surched it will defult to the movie "Mr. Nobody".
 For the node liri.js do-what-it-says command it will take information for the random.txt file and run the whatever command is in there at the time.
+### Screenshots
