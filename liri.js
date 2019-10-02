@@ -86,7 +86,15 @@ function spotifyThisSong(search) {
       return console.log('Error occurred: ' + err);
     }
 
-    console.log(data.tracks.items);
+    // console.log(data.tracks.items);
+   // artist 
+   console.log(data.artists);
+    // song name
+    console.log(data.name);
+    // preview link
+    console.log(data.preview_url);
+    // album
+    console.log(data.album.name);
   });
 
 }
